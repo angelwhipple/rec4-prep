@@ -34,9 +34,10 @@ export default class AuthenticatingConcept {
 
   async getUserById(_id: ObjectId) {
     // NEW
-    const user = await this.users.readOne({ _id }, );
+    const user = await this.users.readOne({ _id }, { projection: { password: 0 }});
     if (user) {
-      return this.redactPassword(user);
+      // return this.redactPassword(user);
+      return user;
     }
     else {
       throw new NotFoundError("User not found");
